@@ -8,12 +8,32 @@ def create_client(client_name):
         print('clients already exist')
 
 
+def delete_client(client):
+    global clients
+    if client in clients:
+        clients = clients.replace(client + ',', '')
+    else:
+        return print('the client not exist')
+
+
+def search_client(client):
+    
+    clients_list = clients.split(',')
+    print(clients_list)
+    for clientL in clients_list:
+        if clientL != client:
+            continue
+        else:
+            return True
+
+
 def modified_client(client_name, update_client_name):
     global clients  
     if client_name in clients:
         clients = clients.replace(client_name + ',', update_client_name + ', ')
     else:
         print('no client found!')
+
 
 def list_clients():
     global clients
@@ -31,7 +51,8 @@ def _print_line():
 
 
 def _get_client_name():
-    return input('what is the client name? ').capitalize()
+    name = input('what is the client name? ')
+    return name.capitalize()
 
 if __name__ == '__main__':
     _print_line()
@@ -42,11 +63,19 @@ if __name__ == '__main__':
         client_name = _get_client_name()
         create_client(client_name)
     elif command == 'D':
-        pass
+        client_name = _get_client_name()
+        delete_client(client_name)
     elif command == 'U':
         client_name = _get_client_name()
         new_client_name = input('new client name? ')
         modified_client(client_name, new_client_name)
+    elif command == 'S':
+        client_name = _get_client_name()
+        found = search_client(client_name)
+        if found:
+            print('found it')
+        else:
+            print('client not found')
     else :
         pass
         
