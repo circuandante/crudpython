@@ -1,3 +1,4 @@
+import sys
 clients = 'Pablo, Ricardo'
 
 def create_client(client_name):
@@ -48,10 +49,20 @@ def _print_line():
     print('[C] if you want create client')
     print('[D] if you want delete client')
     print('[U] if you want edit contact')
+    print('[S] if you want search a client')
 
 
 def _get_client_name():
-    name = input('what is the client name? ')
+    name = None
+
+    while not name:
+        name = input('what is the client name? ')
+        if name == 'exit':
+            name = None
+            break
+    if not name: 
+            sys.exit()
+
     return name.capitalize()
 
 if __name__ == '__main__':
