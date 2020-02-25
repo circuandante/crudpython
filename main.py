@@ -20,19 +20,16 @@ def create_client(client_name):
 
 def delete_client(client):
     global clients
-    if client in clients:
+    if client in clients['name']:
         clients.remove(client)
     else:
         return print('the client not exist')
 
 
 def search_client(client):
-    
-    for clientL in clients:
-        if clientL != client:
-            continue
-        else:
-            return True
+    indice = clients.index(client)
+    print(indice)
+    return True
 
 
 def modified_client(client_name, update_client_name):
@@ -46,7 +43,7 @@ def modified_client(client_name, update_client_name):
 
 def list_clients():
     for idx, client in enumerate(clients):
-        print('{}:{}'.format(idx, client['name']))
+        print('{}: {} | {}'.format(idx, client['name'], client['company']))
 
 
 def _print_line():
@@ -60,11 +57,13 @@ def _print_line():
     print('[S] if you want search a client')
 
 
-def _get_client_field(field):
-    field = none
+def _get_client_field(field_name):
+    field = None
     
     while not field:
-        field = input('what is the client {}?'.format(field))
+        field = input('what is the client {}?'.format(field_name))
+
+    return field
 
 
 def _get_client_name():
@@ -87,10 +86,10 @@ if __name__ == '__main__':
 
     if (command == 'C'):
         client = {
-            'name' : _get_client_field('name')
+            'name' : _get_client_field('name'),
             'company': _get_client_field('company')
         }            
-        create_client(client_name)
+        create_client(client)
     elif command == 'D':
         client_name = _get_client_name()
         delete_client(client_name)
