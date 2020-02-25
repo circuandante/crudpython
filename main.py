@@ -1,5 +1,14 @@
 import sys
-clients = ['Pablo', 'Ricardo']
+clients = [
+        {
+            'name': 'Pablo',
+            'company' : 'facebook',
+        },
+        {
+            'name': 'Ricardo',
+            'company': 'google',
+        }
+    ]
 
 def create_client(client_name):
     global clients
@@ -37,7 +46,7 @@ def modified_client(client_name, update_client_name):
 
 def list_clients():
     for idx, client in enumerate(clients):
-        print('{}:{}'.format(idx, client))
+        print('{}:{}'.format(idx, client['name']))
 
 
 def _print_line():
@@ -49,6 +58,13 @@ def _print_line():
     print('[D] if you want delete client')
     print('[U] if you want edit contact')
     print('[S] if you want search a client')
+
+
+def _get_client_field(field):
+    field = none
+    
+    while not field:
+        field = input('what is the client {}?'.format(field))
 
 
 def _get_client_name():
@@ -70,7 +86,10 @@ if __name__ == '__main__':
     command = command.upper()
 
     if (command == 'C'):
-        client_name = _get_client_name()
+        client = {
+            'name' : _get_client_field('name')
+            'company': _get_client_field('company')
+        }            
         create_client(client_name)
     elif command == 'D':
         client_name = _get_client_name()
